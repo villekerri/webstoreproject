@@ -13,7 +13,6 @@ Vagrant.configure("2") do |config|
     apt-get install -y apache2
     echo "ServerName localhost" >> /etc/apache2/apache2.conf
     service apache2 restart
-    echo "192.168.33.10  trusty.test" >> /etc/hosts
 
     echo -e"\n --installing php7.1-- \n"
 
