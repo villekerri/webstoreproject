@@ -1,0 +1,46 @@
+CREATE TABLE User
+(
+  Username VARCHAR(20) NOT NULL,
+  Password VARCHAR(20) NOT NULL,
+  UserID VARCHAR(50) NOT NULL,
+  Address VARCHAR(50),
+  PRIMARY KEY (UserID)
+);
+
+CREATE TABLE Product
+(
+  ProductID VARCHAR(50) NOT NULL,
+  ProductName VARCHAR(50) NOT NULL,
+  ProductType VARCHAR(50) NOT NULL,
+  ProductPrice FLOAT NOT NULL,
+  ProductQuantity INT NOT NULL,
+  PRIMARY KEY (ProductID)
+);
+
+CREATE TABLE Order
+(
+  OrderID VARCHAR(50) NOT NULL,
+  OrderStatus VARCHAR(50) NOT NULL,
+  UserID VARCHAR(50) NOT NULL,
+  PRIMARY KEY (OrderID),
+  FOREIGN KEY (UserID) REFERENCES User(UserID)
+);
+
+CREATE TABLE ProductOrder
+(
+  ProductOrderID VARCHAR(50) NOT NULL,
+  OrderQuantity INT NOT NULL,
+  ProductID VARCHAR(50) NOT NULL,
+  OrderID VARCHAR(50),
+  PRIMARY KEY (ProductOrderID),
+  FOREIGN KEY (ProductID) REFERENCES Product(ProductID),
+  FOREIGN KEY (OrderID) REFERENCES Order(OrderID)
+);
+
+CREATE TABLE User_Card
+(
+  Card INT NOT NULL,
+  UserID VARCHAR(50) NOT NULL,
+  PRIMARY KEY (Card, UserID),
+  FOREIGN KEY (UserID) REFERENCES User(UserID)
+);
