@@ -1,12 +1,15 @@
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE User
 (
   Username VARCHAR(20) NOT NULL,
   Password VARCHAR(20) NOT NULL,
   UserID VARCHAR(50) NOT NULL,
+  UserType VARCHAR(20) NOT NULL,
   Address VARCHAR(50),
   PRIMARY KEY (UserID)
 );
 
+DROP TABLE IF EXISTS `Product`;
 CREATE TABLE Product
 (
   ProductID VARCHAR(50) NOT NULL,
@@ -17,6 +20,7 @@ CREATE TABLE Product
   PRIMARY KEY (ProductID)
 );
 
+DROP TABLE IF EXISTS `Order`;
 CREATE TABLE Order
 (
   OrderID VARCHAR(50) NOT NULL,
@@ -26,6 +30,7 @@ CREATE TABLE Order
   FOREIGN KEY (UserID) REFERENCES User(UserID)
 );
 
+DROP TABLE IF EXISTS `ProductOrder`;
 CREATE TABLE ProductOrder
 (
   ProductOrderID VARCHAR(50) NOT NULL,
@@ -37,6 +42,7 @@ CREATE TABLE ProductOrder
   FOREIGN KEY (OrderID) REFERENCES Order(OrderID)
 );
 
+DROP TABLE IF EXISTS `User_Card`;
 CREATE TABLE User_Card
 (
   Card INT NOT NULL,
@@ -44,3 +50,7 @@ CREATE TABLE User_Card
   PRIMARY KEY (Card, UserID),
   FOREIGN KEY (UserID) REFERENCES User(UserID)
 );
+
+DROP USER IF EXISTS 'dbuser01'@'localhost';
+CREATE USER 'dbuser01'@'localhost' IDENTIFIED BY 'dbpass';
+GRANT SELECT, INSERT, UPDATE, DELETE ON webstore.* TO dbuser01@localhost;
