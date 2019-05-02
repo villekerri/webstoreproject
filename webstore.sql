@@ -1,56 +1,52 @@
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE User
+DROP DATABASE IF EXISTS webstore;
+CREATE DATABASE webstore;
+USE webstore;
+
+CREATE TABLE users
 (
-  Username VARCHAR(20) NOT NULL,
-  Password VARCHAR(20) NOT NULL,
-  UserID VARCHAR(50) NOT NULL,
-  UserType VARCHAR(20) NOT NULL,
-  Address VARCHAR(50),
-  PRIMARY KEY (UserID)
+  username VARCHAR(20) NOT NULL,
+  password VARCHAR(20) NOT NULL,
+  userid INT NOT NULL,
+  address VARCHAR(50),
+  PRIMARY KEY (userid)
 );
 
-DROP TABLE IF EXISTS `Product`;
-CREATE TABLE Product
+CREATE TABLE product
 (
-  ProductID VARCHAR(50) NOT NULL,
-  ProductName VARCHAR(50) NOT NULL,
-  ProductType VARCHAR(50) NOT NULL,
-  ProductPrice FLOAT NOT NULL,
-  ProductQuantity INT NOT NULL,
-  PRIMARY KEY (ProductID)
+  productid VARCHAR(50) NOT NULL,
+  productname VARCHAR(50) NOT NULL,
+  producttype VARCHAR(50) NOT NULL,
+  productprice FLOAT NOT NULL,
+  productquantity INT NOT NULL,
+  PRIMARY KEY (productid)
 );
 
-DROP TABLE IF EXISTS `Order`;
-CREATE TABLE Order
+CREATE TABLE orders
 (
-  OrderID VARCHAR(50) NOT NULL,
-  OrderStatus VARCHAR(50) NOT NULL,
-  UserID VARCHAR(50) NOT NULL,
-  PRIMARY KEY (OrderID),
-  FOREIGN KEY (UserID) REFERENCES User(UserID)
+  orderid VARCHAR(50) NOT NULL,
+  orderstatus VARCHAR(50) NOT NULL,
+  userid INT NOT NULL,
+  PRIMARY KEY (orderid),
+  FOREIGN KEY (userid) REFERENCES users(userid)
 );
 
-DROP TABLE IF EXISTS `ProductOrder`;
+
 CREATE TABLE ProductOrder
 (
-  ProductOrderID VARCHAR(50) NOT NULL,
-  OrderQuantity INT NOT NULL,
-  ProductID VARCHAR(50) NOT NULL,
-  OrderID VARCHAR(50),
-  PRIMARY KEY (ProductOrderID),
-  FOREIGN KEY (ProductID) REFERENCES Product(ProductID),
-  FOREIGN KEY (OrderID) REFERENCES Order(OrderID)
+  productorderid VARCHAR(50) NOT NULL,
+  orderquantity INT NOT NULL,
+  productid VARCHAR(50) NOT NULL,
+  orderid VARCHAR(50),
+  PRIMARY KEY (productorderid),
+  FOREIGN KEY (productid) REFERENCES product(productid),
+  FOREIGN KEY (orderid) REFERENCES orders(orderid)
 );
 
-DROP TABLE IF EXISTS `User_Card`;
-CREATE TABLE User_Card
+
+CREATE TABLE user_card
 (
-  Card INT NOT NULL,
-  UserID VARCHAR(50) NOT NULL,
-  PRIMARY KEY (Card, UserID),
-  FOREIGN KEY (UserID) REFERENCES User(UserID)
+  card INT NOT NULL,
+  userid INT NOT NULL,
+  PRIMARY KEY (card, userid),
+  FOREIGN KEY (userid) REFERENCES users(userid)
 );
-
-DROP USER IF EXISTS 'dbuser01'@'localhost';
-CREATE USER 'dbuser01'@'localhost' IDENTIFIED BY 'dbpass';
-GRANT SELECT, INSERT, UPDATE, DELETE ON webstore.* TO dbuser01@localhost;
