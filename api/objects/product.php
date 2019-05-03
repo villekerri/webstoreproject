@@ -48,7 +48,7 @@ class Product{
     }
 
     function delete(){
-        $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
+        $query = "DELETE FROM products WHERE id = ?";
         $stmt = $this->conn->prepare($query);
         $this->id=htmlspecialchars(strip_tags($this->id));
         $stmt->bindParam(1, $this->id);
