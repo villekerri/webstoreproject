@@ -30,7 +30,7 @@ CREATE TABLE orders
   FOREIGN KEY (userid) REFERENCES users(userid)
 );
 
-CREATE TABLE ProductOrder
+CREATE TABLE productorders
 (
   productorderid VARCHAR(50) NOT NULL,
   orderquantity INT NOT NULL,
