@@ -11,9 +11,9 @@ CREATE TABLE users
   PRIMARY KEY (userid)
 );
 
-CREATE TABLE product
+CREATE TABLE products
 (
-  productid VARCHAR(50) NOT NULL,
+  productid INT NOT NULL,
   productname VARCHAR(50) NOT NULL,
   producttype VARCHAR(50) NOT NULL,
   productprice FLOAT NOT NULL,
@@ -30,14 +30,14 @@ CREATE TABLE orders
   FOREIGN KEY (userid) REFERENCES users(userid)
 );
 
-CREATE TABLE ProductOrder
+CREATE TABLE productorders
 (
   productorderid VARCHAR(50) NOT NULL,
   orderquantity INT NOT NULL,
-  productid VARCHAR(50) NOT NULL,
+  productid INT NOT NULL,
   orderid VARCHAR(50),
   PRIMARY KEY (productorderid),
-  FOREIGN KEY (productid) REFERENCES product(productid),
+  FOREIGN KEY (productid) REFERENCES products(productid),
   FOREIGN KEY (orderid) REFERENCES orders(orderid)
 );
 
