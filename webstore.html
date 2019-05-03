@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Web Store</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3">
+            <h1 class="text-white bg-dark mr-4">WEB STOREEEEE!!!!!</h1>
+            <div class="btn-group btn-group" role="group">
+                <button id="eka" class="btn btn-outline-light btn-lg">Productions</button>
+                <!--btn btn-primary btn-lg -->
+                <button id="toka" class="btn btn-outline-light">toka klikki</button>
+                <button id="neljäs" class="btn btn-outline-light">neljäs klikki</button>
+            </div>
+            <div class="navbar-nav ml-auto">
+                <button id="kolmas" class="btn btn-outline-light">Log in | Register</button>
+            </div>
+        </nav>
+        <main>
+            <div id="products">
+                <h2>Products</h2>
+                <input type="text" id="prodList" onkeyup="listingProducts()" placeholder="Search products" title="Type in a products name">
+                <table id="productList">
+                    <br>
+                    <br>
+                    <!-- tuotteiden lista -->
+                    <tr class="header">
+                        <th style="width:60%;">Name</th>
+                        <th style="width:40%;">Country</th>
+                    </tr>
+                    <tr>
+                        <td>Alfreds Futterkiste</td>
+                        <td>Germany</td>
+                    </tr>
+                    <tr>
+                        <td>Berglunds snabbkop</td>
+                        <td>Sweden</td>
+                    </tr>
+                    <tr>
+                        <td>Island Trading</td>
+                        <td>UK</td>
+                    </tr>
+                    <tr>
+                        <td>Koniglich Essen</td>
+                        <td>Germany</td>
+                    </tr>
+                    <tr>
+                        <td>Laughing Bacchus Winecellars</td>
+                        <td>Canada</td>
+                    </tr>
+                    <tr>
+                        <td>Magazzini Alimentari Riuniti</td>
+                        <td>Italy</td>
+                    </tr>
+                    <tr>
+                        <td>North/South</td>
+                        <td>UK</td>
+                    </tr>
+                    <tr>
+                        <td>Paris specialites</td>
+                        <td>France</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- ****Register and log in**** -->
+
+            <div id="logRegister">
+                <div class="row">
+                    <div class="container col-sm">
+                        <h2>Sign Up</h2>
+                        <p>Please fill in this form to create an account.</p>
+                        <hr>
+
+                        <label for="email"><b>Email</b></label>
+                            <input type="text" placeholder="Enter Email" name="email" required>
+                        <br>
+
+                        <label for="psw"><b>Password</b></label>
+                            <input type="password" placeholder="Enter Password" name="psw" required>
+                        <br>
+
+                        <label for="psw-repeat"><b>Repeat Password</b></label>
+                            <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+                        <br>
+
+                        <label>
+                            <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+                        </label>
+                        <br>
+
+                        <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+
+                        <div class="clearfix">
+                            <button type="button" class="cancelbtn">Cancel</button>
+                            <button type="submit" class="signupbtn">Sign Up</button>
+                        </div>
+                    </div>
+
+            <!-- ----------------------------- -->
+
+                    <div class="container col-sm"><br>
+                        <h2>Log in</h2><hr>
+                        <label for="uname"><b>Username</b></label>
+                        <input type="text" placeholder="Enter Username" name="uname" required><br>
+                        <label for="psw"><b>Password</b></label>
+                        <input type="password" placeholder="Enter Password" name="psw" required><br>
+                        <label>
+                            <input type="checkbox" checked="checked" name="remember"> Remember me
+                        </label><br>
+
+                        <div class="container" style="background-color:#f1f1f1">
+                            <button type="button" class="cancelbtn">Cancel</button>
+                            <button type="submit">Login</button>
+                            <span class="psw">Forgot <a href="#">password?</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="ostoskori">
+            jtn3
+            jtn3
+            </div>
+        </main>
+    </body>
+    <script type="text/javascript" src="js/webPages.js"></script>
+</html>
