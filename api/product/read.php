@@ -19,7 +19,7 @@ if($num>0){
         $product_item=array(
             "id" => $id,
             "name" => $name,
-            "description" => html_entity_decode($description),
+            "type" => html_entity_decode($type),
         );
  
         array_push($products_arr["records"], $product_item);
