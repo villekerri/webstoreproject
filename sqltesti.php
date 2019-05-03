@@ -40,7 +40,7 @@ if (mysqli_query($link, $deleteuser)) {
     echo "ei onnistunut" . mysqli_error($link);
 }
 
-$productid = 'tuote';
+$productid = 1;
 $productname = 'pusero';
 $producttype = 'paita';
 $productprice = 12.4;
@@ -95,37 +95,6 @@ function deleteproduct($link, $id){
     }
 }
 
-addproduct($link, 'hattu', 'Hattu', 'Vaate', 1, 10);
-addproduct($link, 'huivi', 'Huivi', 'Vaate', 1, 7);
-addproduct($link, 'leipa', 'Leipa', 'Elintarvike', 1, 46);
-
-getproducts($link);
-
-deleteproduct($link, 'hattu');
-deleteproduct($link, 'huivi');
-deleteproduct($link, 'leipa');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 mysqli_close($link);
-
 
 ?>
