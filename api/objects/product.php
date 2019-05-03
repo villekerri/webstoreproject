@@ -39,7 +39,6 @@ class Product{
         $query = "";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
-        $row = $stmt->fetch();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $this->name = $row['name'];
         $this->type = $row['type'];
