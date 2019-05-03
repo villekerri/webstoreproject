@@ -10,122 +10,69 @@ $link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 // Check connection
 if($link === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
+} else {
+    echo "Connection to the database works. <br>";
 }
 
-$createuser = "INSERT INTO users (username, password, userid, address) VALUES ('kayttaja', 'salasana', 1, 'osoite')";
+$createuser = "INSERT INTO users (userid, username, password, address) VALUES (99, 'kayttaja', 'salasana', 'osoite')";
 
 if (mysqli_query($link, $createuser)) {
-    echo "onnistui. ";
+    echo "User added. <br>";
 } else {
-    echo "ei onnistunut: " . $createuser . "<br>" . mysqli_error($link);
+    echo "Adding user failed: " . $createuser . "<br>" . mysqli_error($link) . "<br>";
 }
 
-$searchuser = "SELECT username, password, userid FROM users WHERE userid=1";
+$searchuser = "SELECT userid, username, password FROM users WHERE userid=99";
 $result = mysqli_query($link, $searchuser);
 
 if (mysqli_num_rows($result) > 0) {
     // output data of each row
     while($row = mysqli_fetch_assoc($result)) {
-        echo "user: " . $row["username"]. " - password: " . $row["password"]. " id:" . $row["userid"]. "<br>";
+        echo "ID: " . $row["userid"]. " - username: " . $row["username"]. " - password: " . $row["password"]. "<br>";
     }
 } else {
-    echo "0 results";
+    echo "0 results. <br>";
 }
 
-$deleteuser = "DELETE FROM users WHERE userid=1";
+$deleteuser = "DELETE FROM users WHERE userid=99";
 
 if (mysqli_query($link, $deleteuser)) {
-    echo "käyttäjä poistettu. ";
+    echo "User deleted. <br>";
 } else {
-    echo "ei onnistunut" . mysqli_error($link);
+    echo "Deleting user failed: " . mysqli_error($link) . "<br>";
 }
-
-$productid = 'tuote';
-$productname = 'pusero';
-$producttype = 'paita';
-$productprice = 12.4;
-$productquantity = 30;
-
-$uusituote = "INSERT INTO product (productid, productname, producttype, productprice, productquantity) VALUES ('$productid', '$productname', '$producttype', $productprice, $productquantity)";
-
-
-if (mysqli_query($link, $uusituote)) {
-    echo "onnistui. ";
-} else {
-    echo "ei onnistunut: " . $uusituote . "<br>" . mysqli_error($link);
-}
-$poistatuote = "DELETE FROM product WHERE productid='tuote'";
-
-if (mysqli_query($link, $poistatuote)) {
-    echo "tuote poistettu. ";
-} else {
-    echo "ei onnistunut" . mysqli_error($link);
-}
-
 
 function addproduct($link, $productid, $productname, $producttype, $productprice, $productquantity){
-    $createproduct = "INSERT INTO product (productid, productname, producttype, productprice, productquantity) VALUES ('$productid', '$productname', '$producttype', $productprice, $productquantity)";
+    $createproduct = "INSERT INTO product (productid, productname, producttype, productprice, productquantity) VALUES ($productid, '$productname', '$producttype', $productprice, $productquantity)";
     if (mysqli_query($createproduct, $link)){
-        echo "Tuote " . $productname . " lisätty. ";
+        echo "Product " . $productname . " added. <br>";
     } else {
-        echo "Tuotetta ei lisätty. " . $createproduct . "<br>";
+        echo "Failed to add the product: " . $createproduct . "<br>";
     }
 }
 
 function getproducts($link){
     $getproducts = "SELECT productname, productprice, productquantity FROM product";
     $result = mysqli_query($link, $getproducts);
-
     if (mysqli_num_rows($result) > 0) {
         // output data of each row
         while($row = mysqli_fetch_assoc($result)) {
-            echo "Product: " . $row[""]. " - password: " . $row["password"]. " id:" . $row["userid"]. "<br>";
+            echo "Product: " . $row["productname"]. " - Price: " . $row["productprice"]. " Quantity:" . $row["productquantity"]. "<br>";
         }
     } else {
-        echo "0 results. ";
+        echo "0 results. <br>";
     }
 }
 
 function deleteproduct($link, $id){
     $deleteproduct = "DELETE FROM product WHERE productid='$id'";
     if (mysqli_query($link, $deleteproduct)) {
-        echo "tuote poistettu. ";
+        echo "Product removed. <br>";
     } else {
-        echo "ei onnistunut " . mysqli_error($link);
+        echo "Removing product failed: " . mysqli_error($link) . "<br>";
     }
 }
 
-addproduct($link, 'hattu', 'Hattu', 'Vaate', 1, 10);
-addproduct($link, 'huivi', 'Huivi', 'Vaate', 1, 7);
-addproduct($link, 'leipa', 'Leipa', 'Elintarvike', 1, 46);
-
-getproducts($link);
-
-deleteproduct($link, 'hattu');
-deleteproduct($link, 'huivi');
-deleteproduct($link, 'leipa');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 mysqli_close($link);
-
 
 ?>
