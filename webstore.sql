@@ -37,7 +37,7 @@ CREATE TABLE ProductOrder
   productid INT NOT NULL,
   orderid VARCHAR(50),
   PRIMARY KEY (productorderid),
-  FOREIGN KEY (productid) REFERENCES product(productid),
+  FOREIGN KEY (productid) REFERENCES products(productid),
   FOREIGN KEY (orderid) REFERENCES orders(orderid)
 );
 
