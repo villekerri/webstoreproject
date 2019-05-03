@@ -25,7 +25,13 @@ Vagrant.configure("2") do |config|
     debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
     debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
     apt-get install -y mysql-server php7.1-mysql
+    
+    mysql -uroot -ppassword -e "CREATE DATABASE IF NOT EXISTS webstoredb;";
+    mysql -uroot -ppassword -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root';"
+    mysql -uroot -ppassword -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY 'root';"
+    
     service mysql restart
+    mysql -uroot -proot webstoredb < webstore.sql
 
   SHELL
 end
