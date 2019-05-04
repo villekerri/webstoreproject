@@ -17,5 +17,4 @@ else{
     http_response_code(503);
     echo json_encode(array("message" => "Unable to delete product."));
 }
-
 ?>
