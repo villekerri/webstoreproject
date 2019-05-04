@@ -10,16 +10,16 @@ $num = $stmt->rowCount();
 if($num>0){
 
     $products_arr=array();
-    $products_arr["records"]=array();
+    $products_arr["products_list"]=array();
 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
         extract($row);
         $product_item=array(
-            "id" => $id,
-            "name" => $name,
-            "type" => html_entity_decode($type),
+            "id" => $productid,
+            "name" => $productname,
+            "type" => $producttype,
         );
-        array_push($products_arr["records"], $product_item);
+        array_push($products_arr["products_list"], $product_item);
     }
     http_response_code(200);
     echo json_encode($products_arr);
