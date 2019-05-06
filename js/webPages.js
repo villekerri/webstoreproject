@@ -1,3 +1,4 @@
+
 var notes = [];
 
 
@@ -6,7 +7,7 @@ var notes = [];
 
 
 document.getElementById('eka').onclick = function () {
-    console.log('ekaa nappia painettu');
+    console.log('"products" nappia painettu');
     document.getElementById('products').style.display = 'block';
     document.getElementById('logRegister').style.display = 'none';
     document.getElementById('ostoskori').style.display = 'none';
@@ -20,13 +21,15 @@ document.getElementById('toka').onclick = function () {
 };
 
 document.getElementById('kolmas').onclick = function () {
-    console.log('kolmatta nappia painettu');
+    console.log('"log ja register" nappia painettu');
     document.getElementById('products').style.display = 'none';
     document.getElementById('logRegister').style.display = 'block';
     document.getElementById('ostoskori').style.display = 'none';
 };
 
-function listingProducts() {
+
+
+function readingProducts() {
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("prodList");
     filter = input.value.toUpperCase();
@@ -44,4 +47,5 @@ function listingProducts() {
         }
     }
 }
+
 
