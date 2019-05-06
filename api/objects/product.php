@@ -1,34 +1,35 @@
 <?php
 class Product{
     private $conn;
-    public $id;
-    public $name;
-    public $type;
-    public $price;
-    public $quantity;
+    public $productname;
+    public $producttype;
+    public $productprice;
+    public $productquantity;
+
+    public $productid;
 
     public function __construct($db){
         $this->conn = $db;
     }
 
     function read(){
-        $query = "SELECT * FROM products;";
+        $query = "SELECT * FROM products";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;
     }
 
-    function create(){
-        $query = "";
+    function createProduct(){
+        $query = "INSERT INTO products SET productname=:productname, producttype=:producttype, productprice=:productprice, productquantity=:productquantity";
         $stmt = $this->conn->prepare($query);
-        $this->name=htmlspecialchars(strip_tags($this->name));
-        $this->type=htmlspecialchars(strip_tags($this->type));
-        $this->price=htmlspecialchars(strip_tags($this->price));
-        $this->quantity=htmlspecialchars(strip_tags($this->quantity));
-        $stmt->bindParam(":name", $this->name);
-        $stmt->bindParam(":type", $this->type);
-        $stmt->bindParam(":price", $this->price);
-        $stmt->bindParam(":quantity", $this->quantity);
+        $this->productname=htmlspecialchars(strip_tags($this->productname));
+        $this->producttype=htmlspecialchars(strip_tags($this->producttype));
+        $this->productprice=htmlspecialchars(strip_tags($this->productprice));
+        $this->productquantity=htmlspecialchars(strip_tags($this->productquantity));
+        $stmt->bindParam(":productname", $this->productname);
+        $stmt->bindParam(":producttype", $this->producttype);
+        $stmt->bindParam(":productprice", $this->productprice);
+        $stmt->bindParam(":productquantity", $this->productquantity);
         if($stmt->execute()){
             return true;
         }
@@ -47,10 +48,10 @@ class Product{
     }
 
     function delete(){
-        $query = "DELETE FROM products WHERE id = ?";
+        $query = "DELETE FROM products WHERE productid=?";
         $stmt = $this->conn->prepare($query);
-        $this->id=htmlspecialchars(strip_tags($this->id));
-        $stmt->bindParam(1, $this->id);
+        $this->productid=htmlspecialchars(strip_tags($this->productid));
+        $stmt->bindParam(1, $this->productid);
         if($stmt->execute()){
             return true;
         }
