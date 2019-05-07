@@ -6,13 +6,12 @@ $database = new Database();
 $db = $database->getConnection();
 $order = new Order($db);
 
-//$data = json_decode(file_get_contents("php://input"));
-//$product->id = $data->id;
+$data = json_decode(file_get_contents("php://input"));
+$order->orderid = $data->orderid;
+/*
 $poistettava->orderid = 3;
-$poistettavajson = json_encode($poistettava);
-$uusidata = json_decode($poistettavajson);
-$order->orderid = $uusidata->orderid;
-
+$order->orderid = $poistettava->orderid;
+*/
 if($order->delete()){
     echo json_encode(array("message" => "Order was deleted."));
 }else{
