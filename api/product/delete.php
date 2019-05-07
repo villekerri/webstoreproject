@@ -1,5 +1,4 @@
 <?php
-
 include_once '../config/database.php';
 include_once '../objects/product.php';
 
@@ -9,7 +8,7 @@ $product = new Product($db);
 
 //$data = json_decode(file_get_contents("php://input"));
 //$product->id = $data->id;
-$poistettava->productid = 6;
+$poistettava->productid = 7;
 $poistettavajson = json_encode($poistettava);
 $uusidata = json_decode($poistettavajson);
 $product->productid = $uusidata->productid;

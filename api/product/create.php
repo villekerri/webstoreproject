@@ -1,5 +1,4 @@
 <?php
-echo("creating product");
 include_once '../config/database.php';
 include_once '../objects/product.php';
 
@@ -10,10 +9,10 @@ $product = new Product($db);
  
 //$data = json_decode(file_get_contents("php://input"));
 
-$uusituote->productname = "Takki";
-$uusituote->productprice = 65;
+$uusituote->productname = "Housut";
+$uusituote->productprice = 80;
 $uusituote->producttype = "Vaate";
-$uusituote->productquantity = 5;
+$uusituote->productquantity = 24;
 
 $uusijson = json_encode($uusituote);
 
