@@ -58,7 +58,7 @@ INSERT INTO orders (orderstatus, userid) VALUES
   ('Send', 3),
   ('Shopping cart', 3);
 
-INSERT INTO productorders (orderquantity, productid, orderid) VALUES
+INSERT INTO productorders (productid, orderquantity, orderid) VALUES
   (1, 1, 1),
   (1, 3, 2),
   (4, 5, 2),
