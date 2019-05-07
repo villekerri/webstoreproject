@@ -5,7 +5,7 @@ include_once '../objects/order.php';
 $database = new Database();
 $db = $database->getConnection();
 $order = new Order($db);
-$order->userid = 2; //isset($_GET['userid']) ? $_GET['userid'] : die();
+$order->userid = isset($_GET['userid']) ? $_GET['userid'] : die();
 $stmt = $order->read_one();
 $num = $stmt->rowCount();
 if($num>0){
