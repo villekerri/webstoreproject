@@ -6,7 +6,7 @@ $database = new Database();
 $db = $database->getConnection();
 $order = new Order($db);
 $order->userid = isset($_GET['userid']) ? $_GET['userid'] : die();
-$stmt = $order->read_one();
+$stmt = $order->read_cart();
 $num = $stmt->rowCount();
 if($num>0){
 
@@ -18,17 +18,12 @@ if($num>0){
         $order_item=array(
             "id" => $orderid,
             "status" => $orderstatus,
-            "productorderid" => $productorderid,
-            "product" => $productname,
-            "quantity" => $orderquantity,
         );
         array_push($orders_arr["orders_list"], $order_item);
     }
-    http_response_code(200);
     echo json_encode($orders_arr);
 }else{
-    http_response_code(404);
-    echo json_encode(array("message" => "No orders found."));
+    echo json_encode(array("message" => "Shopping cart is empty."));
 }
 ?>
 

@@ -22,6 +22,7 @@ if($num>0){
             "id" => $productid,
             "name" => $productname,
             "type" => $producttype,
+            "quantity" => $productquantity,
         );
         array_push($products_arr["products_list"], $product_item);
     }
@@ -32,3 +33,6 @@ if($num>0){
     echo json_encode(array("message" => "No products found."));
 }
 ?>
+
+<script type="text/javascript">an_obj = "<?php echo $json_data;?>";</script>
+<script type="text/javascript" src="webPages.js"></script>

@@ -9,12 +9,12 @@ $order = new Order($db);
 $data = json_decode(file_get_contents("php://input"));
 $order->orderid = $data->orderid;
 /*
-$poistettava->orderid = 3;
-$order->orderid = $poistettava->orderid;
+$update->orderid = 12;
+$order->orderid = $update->orderid;
 */
-if($order->delete()){
-    echo json_encode(array("message" => "Order was deleted."));
+if($order->update()){
+    echo json_encode(array("message" => "Status updated."));
 }else{
-    echo json_encode(array("message" => "Unable to delete order."));
+    echo json_encode(array("message" => "Unable to update status."));
 }
 ?>
