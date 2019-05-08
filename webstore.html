@@ -6,124 +6,50 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="js/jquery/login.js"></script>
+
+
         <!-- Custom CSS -->
         <link href="app/assets/css/custom.css" rel="stylesheet" media="screen" />
 
     </head>
     <body>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3">
-            <h1 class="text-white bg-dark mr-4">WEB STOREEEEE!!!!!</h1>
-            <div class="btn-group btn-group" role="group">
-                <button id="eka" class="btn btn-outline-light btn-lg">Productions</button>
-                <!--btn btn-primary btn-lg -->
-                <button id="toka" class="btn btn-outline-light">toka klikki</button>
-                <button id="neljäs" class="btn btn-outline-light">neljäs klikki</button>
-            </div>
-            <div class="navbar-nav ml-auto">
-                <button id="kolmas" class="btn btn-outline-light">Log in | Register</button>
-            </div>
-        </nav>
-        <main>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3">
+        <h1 class="text-white bg-dark mr-4">WEB STOREEEEE!!!!!</h1>
+        <div class="btn-group btn-group" role="group">
+            <button id="products" class="btn btn-outline-light btn-lg">Productions</button>
+            <!--btn btn-primary btn-lg -->
+            <button id="toka" class="btn btn-outline-light">toka klikki</button>
+            <button id="neljäs" class="btn btn-outline-light">neljäs klikki</button>
+        </div>
+        <div class="navbar-nav ml-auto">
+            <button id="logReg" class="btn btn-outline-light">Log in | Register</button>
+        </div>
+    </nav>
+    <main role="main" class="container starter-template">
 
-            <!-- Products page -->
-            <!-- container -->
-            <div id="products">
-                <!-- our app will be injected here -->
-                <div id="app"></div>
-                <div class="container">
+        <!-- Products page -->
+        <div id="products">
+            <!-- our app will be injected here -->
+            <div id="app"></div>
+            <div class="container">
 
-                    <div class="page-header">
-                        <h1>Loading...</h1>
-                    </div>
+                <div class="page-header">
+                    <h1>Products</h1>
+                </div>
 
                 <!-- placeholder for rendering react components -->
-                    <div id='content'></div>
-                </div>
-            </div>
-            <!-- /container -->
-
-            <!-- ****Register and log in**** -->
-            <div id="logRegister">
-                <div class="row">
-                    <div class="container col-sm">
-                        <h2>Sign Up</h2>
-                        <p>Please fill in this form to create an account.</p>
-                        <hr>
-
-                        <label for="uname"><b>Username</b></label>
-                            <input type="text" placeholder="Enter Username" name="uname" required>
-                        <br>
-
-                        <label for="psw"><b>Password</b></label>
-                            <input type="password" placeholder="Enter Password" name="psw" required>
-                        <br>
-
-                        <label for="psw-repeat"><b>Repeat Password</b></label>
-                            <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
-                        <br>
-
-                        <label>
-                            <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
-                        </label>
-                        <br>
-
-                        <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
-
-                        <div class="clearfix">
-                            <button type="button" class="cancelbtn">Cancel</button>
-                            <button type="submit" class="signupbtn">Sign Up</button>
-                        </div>
-                    </div>
-                <!-- ---------------- -->
-                    <div class="container col-sm"><br>
-                        <h2>Log in</h2><hr>
-                        <label for="uname"><b>Username</b></label>
-                        <input type="text" placeholder="Enter Username" name="uname" required><br>
-                        <label for="psw"><b>Password</b></label>
-                        <input type="password" placeholder="Enter Password" name="psw" required><br>
-                        <label>
-                            <input type="checkbox" checked="checked" name="remember"> Remember me
-                        </label><br>
-
-                        <div class="container" style="background-color:#f1f1f1">
-                            <button type="button" class="cancelbtn">Cancel</button>
-                            <button type="submit">Login</button>
-                            <span class="psw">Forgot <a href="#">password?</a></span>
-                        </div>
-                    </div>
-                </div>
             </div>
 
-            <div id="ostoskori">
-            jtn3
-            jtn3
-            </div>
-        </main>
+        </div>
+    </main>
+
+
+
+
+
     </body>
-    <script type="text/javascript" src="js/webPages.js"></script>
-    <!-- react js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
-
-    <!-- react code -->
-    <script type="text/babel" src="app/product/update_product.component.js"></script>
-    <script type="text/babel" src="app/product/create_product.component.js"></script>
-    <script type="text/babel" src="app/product/read_one_product.component.js"></script>
-    <script type="text/babel" src="app/product/delete_product.component.js"></script>
-    <script type="text/babel" src="app/product/product_table_row.component.js"></script>
-    <script type="text/babel" src="app/product/product_table.component.js"></script>
-    <script type="text/babel" src="app/product/top_actions.component.js"></script>
-    <script type="text/babel" src="app/product/read_products.component.js"></script>
-    <script type="text/babel" src="app/main.component.js"></script>
-
-    <!-- jQuery library required by bootsrap js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-    <!-- bootstrap JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--<script type="text/javascript" src="js/webPages.js"></script>-->
 
 </html>
