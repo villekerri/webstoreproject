@@ -1,4 +1,10 @@
 <?php
+
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+
 include_once '../config/database.php';
 include_once '../objects/product.php';
 
@@ -7,13 +13,7 @@ $db = $database->getConnection();
 $product = new Product($db);
  
 $data = json_decode(file_get_contents("php://input"));
-/*
-$uusituote->productname = "Mehu";
-$uusituote->productprice = 1.35;
-$uusituote->producttype = "Elintarvike";
-$uusituote->productquantity = 48;
-$data = $uusituote;
- */
+
 if(!empty($data->productname) && !empty($data->producttype) && !empty($data->productprice) && !empty($data->productquantity)){
     $product->productname = $data->productname;
     $product->productprice = $data->productprice;
