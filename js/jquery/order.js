@@ -11,8 +11,8 @@ $(document).ready(function(){
             for (var i = 0; i < orders.orders_list.length ; i++){
                 jotain += "<tr><td>" + orders.orders_list[i].id + "</td><td>" + orders.orders_list[i].status + "</td><td>" + orders.orders_list[i].productorderid +
                     "</td><td>" + orders.orders_list[i].product + "</td><td>" + orders.orders_list[i].quantity +
-                    "</td><td><button class='confirm_" + orders.orders_list[i].id + "'>Confirm</button></td><td><button class='delete_" +
-                    orders.orders_list[i].id + "'>Delete</button></td></tr>";
+                    "</td><td><button class='confirm_" + orders.orders_list[i].id + "'>Confirm</button></td>" +
+                    "<td><button class='delete_" + orders.orders_list[i].id + "'>Delete</button></td></tr>";
             }
             jotain += "</table>"
             return jotain

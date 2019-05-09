@@ -12,7 +12,6 @@ $product = new Product($db);
 $stmt = $product->read();
 $num = $stmt->rowCount();
 
-var_dump($database);
 if($num>0){
 
     $products_arr=array();
