@@ -1,17 +1,15 @@
-//orders
 $(document).ready(function(){
-    //http://192.168.33.10/api/order/read.php
     $(document).on('click', '#ordersbutton', async function(){
-        console.log("printing user id");
-        var a = await getUserId();
-        console.log(a);
-        console.log("user id printed");
+      
+        var orders = await $.getJSON("http://192.168.33.10/api/order/read.php", function(data){});
+
         // if (admin) {
         /*
         var orders = await $.getJSON("http://192.168.33.10/api/order/read.php", function(data){
             console.log(data);
         });
         console.log(orders);
+
         var tassa = function () {
             var jotain = "<table><tr><th>Order ID</th><th>Status</th><th>Productorder ID</th><th>Product</th><th>Quantity</th><th>User ID</th><th>User address</th></tr>";
             for (var i = 0; i < orders.orders_list.length ; i++){
@@ -28,6 +26,7 @@ $(document).ready(function(){
             jotain += "</table>"
             return jotain
         }
+        
         var html = `<h2>List of the orders</h2>` + tassa();
         clearResponse();
         $('#home').html(html);
@@ -71,8 +70,6 @@ $(document).ready(function(){
         // }
 
     });
-
-
 
     function clearResponse(){
         $('#response').html('');
