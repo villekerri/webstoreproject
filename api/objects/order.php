@@ -13,7 +13,7 @@ class Order{
 
     function read(){
         $query = "select orders.orderid, orders.orderstatus, productorders.productorderid, products.productname, 
-                  productorders.orderquantity from orders inner join productorders on 
+                  productorders.orderquantity, users.userid, users.address from users inner join orders on users.userid=orders.userid inner join productorders on 
                   orders.orderid=productorders.orderid inner join products on 
                   productorders.productid=products.productid order by orders.orderid, productorders.productorderid";
         $stmt = $this->conn->prepare($query);
