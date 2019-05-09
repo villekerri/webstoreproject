@@ -5,7 +5,8 @@ include_once '../objects/order.php';
 $database = new Database();
 $db = $database->getConnection();
 $order = new Order($db);
-$order->userid = isset($_GET['userid']) ? $_GET['userid'] : die();
+$data = json_decode(file_get_contents("php://input"));
+$order->userid = $data->userid;
 
 if($order->read_cart()){
     if($order->submitOrder()){
@@ -23,6 +24,3 @@ if($order->read_cart()){
     echo json_encode(array("message" => "Unable to create order."));
 }
 ?>
-
-<script type="text/javascript">an_obj = "<?php echo $json_data;?>";</script>
-<script type="text/javascript" src="webPages.js"></script>
