@@ -20,6 +20,8 @@ if($num>0){
             "productorderid" => $productorderid,
             "product" => $productname,
             "quantity" => $orderquantity,
+            "userid" => $userid,
+            "useraddress" => $address,
         );
         array_push($orders_arr["orders_list"], $order_item);
     }
@@ -31,5 +33,3 @@ if($num>0){
 }
 ?>
 
-<script type="text/javascript">an_obj = "<?php echo $json_data;?>";</script>
-<script type="text/javascript" src="webPages.js"></script>
