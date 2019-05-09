@@ -23,6 +23,7 @@ if($num>0){
             "id" => $productid,
             "name" => $productname,
             "type" => $producttype,
+            "price" => $productprice,
             "quantity" => $productquantity,
         );
         array_push($products_arr["products_list"], $product_item);

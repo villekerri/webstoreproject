@@ -5,7 +5,8 @@ include_once '../objects/order.php';
 $database = new Database();
 $db = $database->getConnection();
 $order = new Order($db);
-$order->userid = isset($_GET['userid']) ? $_GET['userid'] : die();
+$data = json_decode(file_get_contents("php://input"));
+$order->userid = $data->userid;
 $stmt = $order->read_one();
 $num = $stmt->rowCount();
 if($num>0){
@@ -31,6 +32,3 @@ if($num>0){
     echo json_encode(array("message" => "No orders found."));
 }
 ?>
-
-<script type="text/javascript">an_obj = "<?php echo $json_data;?>";</script>
-<script type="text/javascript" src="webPages.js"></script>
