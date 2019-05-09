@@ -34,5 +34,3 @@ if($num>0){
 }
 ?>
 
-<script type="text/javascript">an_obj = "<?php echo $json_data;?>";</script>
-<script type="text/javascript" src="webPages.js"></script>
