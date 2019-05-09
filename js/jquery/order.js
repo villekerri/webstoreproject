@@ -1,17 +1,15 @@
-//orders
 $(document).ready(function(){
-    //http://192.168.33.10/api/order/read.php
     $(document).on('click', '#ordersbutton', async function(){
-        console.log("printing user id");
-        var a = await getUserId();
-        console.log(a);
-        console.log("user id printed");
+      
+        var orders = await $.getJSON("http://192.168.33.10/api/order/read.php", function(data){});
+
         // if (admin) {
         /*
         var orders = await $.getJSON("http://192.168.33.10/api/order/read.php", function(data){
             console.log(data);
         });
         console.log(orders);
+
         var tassa = function () {
             var jotain = "<table><tr><th>Order ID</th><th>Status</th><th>Productorder ID</th><th>Product</th><th>Quantity</th><th>User ID</th><th>User address</th></tr>";
             for (var i = 0; i < orders.orders_list.length ; i++){
@@ -28,6 +26,7 @@ $(document).ready(function(){
             jotain += "</table>"
             return jotain
         }
+        
         var html = `<h2>List of the orders</h2>` + tassa();
         clearResponse();
         $('#home').html(html);
@@ -48,7 +47,7 @@ $(document).ready(function(){
             }
         });
         var tassa = function () {
-            var jotain = "<table><tr><th>Order ID</th><th>Status</th><th>Productorder ID</th><th>Product</th><th>Quantity</th></tr>";
+            var jotain = "<table><tr><th>Order ID</th><th>Status</th><th>Productorder ID</th><th>Product</th><th>Quantity</th><th>Submmit shopping cart</th><th>Remove from the cart</th></tr>";
             for (var i = 0; i < orders.orders_list.length ; i++){
                 jotain += "<tr><td>" + orders.orders_list[i].id +
                     "</td><td>" + orders.orders_list[i].status +
@@ -56,7 +55,8 @@ $(document).ready(function(){
                     "</td><td>" + orders.orders_list[i].product +
                     "</td><td>" + orders.orders_list[i].quantity;
                     if (orders.orders_list[i].status=="Shopping cart"){
-                        jotain += "</td><td><button class='send' onclick='submitOrder(" + 9999 + ")'>Submit shopping cart</button></td></tr>"; // userid 9999 tilalle
+                        jotain += "</td><td><button class='send' onclick='submitOrder(" + 9999 + ")'>Submit whole cart</button></td>" +
+                            "<td><button class='remove_part' onclick='removePart(" + orders.orders_list[i].productorderid + ")'>Remove from cart</button></td></tr>"; // userid 9999 tilalle
                     } else {
                         jotain += "</td></tr>";
                     }
@@ -70,8 +70,6 @@ $(document).ready(function(){
         // }
 
     });
-
-
 
     function clearResponse(){
         $('#response').html('');
@@ -101,6 +99,15 @@ async function submitOrder(id){
         url: 'http://192.168.33.10/api/order/create.php',
         type: 'POST',
         data: '{ "userid": "101"}', //data: '{ "orderid": "' + id + '"}', kun löytyy oikee userid
+        datatype: 'json'
+    })
+}
+
+async function removePart(id) {
+    $.ajax({
+        url: 'http://192.168.33.10/api/order/delete_part.php',
+        type: 'POST',
+        data: '{ "productorderid": "' + id + '"}',
         datatype: 'json'
     })
 }
