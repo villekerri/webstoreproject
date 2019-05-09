@@ -48,6 +48,11 @@ class Product{
     }
 
     function delete(){
+        $query = "DELETE FROM productorders WHERE productid=?";
+        $stmt = $this->conn->prepare($query);
+        $this->productid=htmlspecialchars(strip_tags($this->productid));
+        $stmt->bindParam(1, $this->productid);
+        $stmt->execute();
         $query = "DELETE FROM products WHERE productid=?";
         $stmt = $this->conn->prepare($query);
         $this->productid=htmlspecialchars(strip_tags($this->productid));
