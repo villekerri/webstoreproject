@@ -40,8 +40,8 @@ Vagrant.configure("2") do |config|
     echo -e"\n --setting up database-- \n"
 
     mysql -uroot -proot -e "CREATE DATABASE IF NOT EXISTS webstore;";
-    mysql -uroot -proot -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root';"
-    mysql -uroot -proot -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY 'root';"
+    mysql -uroot -proot -e "GRANT ALL PRIVILEGES ON webstore.* TO 'root'@'%' IDENTIFIED BY 'root';"
+    mysql -uroot -proot -e "GRANT ALL PRIVILEGES ON webstore.* TO 'root'@'localhost' IDENTIFIED BY 'root';"
     
     service mysql restart
     mysql -uroot -proot webstore < /var/www/html/webstore.sql
