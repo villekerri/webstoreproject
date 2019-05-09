@@ -4,6 +4,7 @@ class User{
     public $id;
     public $username;
     public $address;
+    public $password;
 
     public function __construct($db){
         $this->conn = $db;
@@ -17,13 +18,15 @@ class User{
     }
 
     function create(){
-        $query = "";
+        $query = "INSERT INTO users SET username = :username, address = :address, password = :password";
         $stmt = $this->conn->prepare($query);
         $this->firstname=htmlspecialchars(strip_tags($this->username));
         $this->email=htmlspecialchars(strip_tags($this->address));
         $this->password=htmlspecialchars(strip_tags($this->password));
         $password_hash = password_hash($this->password, PASSWORD_BCRYPT);
-        $stmt->bindParam('sss', $this->firstname,$this->address,$password_hash);
+        $stmt->bindParam(":username", $this->username);
+        $stmt->bindParam(":address", $this->address);
+        $stmt->bindParam(":password", $password_hash);
         if($stmt->execute()){
             return true;
         } else {

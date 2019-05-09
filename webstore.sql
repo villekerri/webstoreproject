@@ -5,8 +5,8 @@ USE webstore;
 CREATE TABLE users
 (
   userid INT NOT NULL AUTO_INCREMENT,
-  username VARCHAR(20) NOT NULL,
-  password VARCHAR(20) NOT NULL,
+  username VARCHAR(32) NOT NULL,
+  password VARCHAR(255) NOT NULL,
   address VARCHAR(50),
   PRIMARY KEY (userid)
 );
