@@ -5,41 +5,28 @@ $(document).ready(function() {
         var datajson = await $.getJSON("http://192.168.33.10/api/product/read.php", function(data){
             console.log(data);
         });
+        var div = document.createElement("div");
 
         console.log(datajson);
-        for (let i=0; i < datajson.products_list.length; i++){
-            var tr = document.createElement("tr");
-            document.body.appendChild(tr);
+        var productList = function () {
+            var table = "<table><tr><th>Name</th><th>Type</th><th>Quantity</th><th>Order Product</th></tr>";
+            for (var i = 0; i < datajson.products_list.length; i++) {
+                var options = "";
+                for (var j = 1; j <=datajson.products_list[i].quantity ; j++){
+                    options = options + "<option value= "+ j +">"+ j +"</option>";
+                }
+                table += "<tr><td>" + datajson.products_list[i].name + "</td>" +
+                    "<td>" + datajson.products_list[i].type + "</td>" +
+                    "<td>" + datajson.products_list[i].quantity + "</td>" +
+                    "<td><select name='score' id=sel"+i+">" + options  + "</select>" +
+                    "<button class='button' onclick= ordering(" + datajson.products_list[i].id + ",document.getElementById('sel"+i+"').selectedIndex+1)>Order</button></td></tr>";
 
-            var nametd = document.createElement("td");
-            nametd.innerHTML = datajson.products_list[i].name;
-            document.body.appendChild(nametd);
-
-            var typetd = document.createElement("td");
-            typetd.innerHTML = datajson.products_list[i].type;
-            document.body.appendChild(typetd);
-
-            var quantitytd = document.createElement("td");
-            quantitytd.innerHTML = datajson.products_list[i].quantity;
-            document.body.appendChild(quantitytd);
+            };
+            table += "</table>";
+            return table;
         };
-        
-        var html = `
-            <h2>Products</h2>
-              <form id='products_form'>
-                <h4>Helllooooo</h4>
-                    <body>
-                        <div id="listing">
-                            
-                        </div>
-                        <script>
-                                                 
-                        </script>
-                    </body>
-        
-        
-        
-        `;
+        var html = `<h2>Products</h2>` + productList();
+
 
         $('#home').html(html);
     });
@@ -47,5 +34,10 @@ $(document).ready(function() {
     // remove any prompt messages
     function clearResponse(){
         $('#response').html('');
-    }
+
+    };
+
 });
+function ordering(id, number) {
+    console.log(id + " "+ number);
+}

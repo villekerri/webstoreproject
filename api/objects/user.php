@@ -21,7 +21,7 @@ class User{
         $query = "INSERT INTO users SET username = :username, address = :address, password = :password";
         $stmt = $this->conn->prepare($query);
         $this->firstname=htmlspecialchars(strip_tags($this->username));
-        $this->email=htmlspecialchars(strip_tags($this->address));
+        $this->address=htmlspecialchars(strip_tags($this->address));
         $this->password=htmlspecialchars(strip_tags($this->password));
         $password_hash = password_hash($this->password, PASSWORD_BCRYPT);
         $stmt->bindParam(":username", $this->username);
@@ -34,18 +34,17 @@ class User{
         }
     }
 
-    function emailExists(){
-        $query = "";
+    function userExists(){
+        $query = "SELECT userid, username, password FROM users WHERE username = ? LIMIT 0,1";
         $stmt = $this->conn->prepare( $query );
-        $this->email=htmlspecialchars(strip_tags($this->email));
-        $stmt->bindParam(1, $this->email);
+        $this->username=htmlspecialchars(strip_tags($this->username));
+        $stmt->bindParam(1, $this->username);
         $stmt->execute();
         $num = $stmt->rowCount();
         if($num>0){
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            $this->id = $row['id'];
+            $this->id = $row['userid'];
             $this->username = $row['username'];
-            $this->address = $row['address'];
             $this->password = $row['password'];
             return true;
         } else {

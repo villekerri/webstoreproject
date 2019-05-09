@@ -63,8 +63,8 @@ $(document).ready(function(){
         var html = `<h2>List of the orders</h2>` + tassa();
         clearResponse();
         $('#home').html(html);
-
         // }
+
     });
 
 
