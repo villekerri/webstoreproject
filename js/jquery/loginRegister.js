@@ -1,43 +1,58 @@
 // log in and register
 $(document).ready(function(){
     // show sign up / registration form
-    $(document).on('click', '#logReg', function(){
+    $(document).on('click', '#logRegButton', function(){
 
         var html = `
-
-
-
-            <h2>Sign Up</h2>
-            <form id='sign_up_form'>
-                <div class="form-group">
-                    <label for="firstname">Firstname</label>
-                    <input type="text" class="form-control" name="firstname" id="firstname" required />
+            <form>
+                <div class="float-left">
+                    <form id='sign_up_form'">
+                        <h2>Sign Up</h2>
+                        <div class="form-group">
+                            <label for="firstname">Firstname</label>
+                            <input type="text" class="form-control" name="firstname" id="firstname" required />
+                        </div>
+        
+                        <div class="form-group">
+                            <label for="lastname">Lastname</label>
+                            <input type="text" class="form-control" name="lastname" id="lastname" required />
+                        </div>
+        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" name="email" id="email" required />
+                        </div>
+        
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" name="password" id="password" required />
+                        </div>
+        
+                        <button type='submit' class='btn btn-primary'>Sign Up</button>
+                    </form>
                 </div>
-
-                <div class="form-group">
-                    <label for="lastname">Lastname</label>
-                    <input type="text" class="form-control" name="lastname" id="lastname" required />
+                <div class="float-right">
+                    <form id='login_form'">
+                        <h2>Login</h2>
+                        <div class='form-group'>
+                            <label for='email'>Email address</label>
+                            <input type='email' class='form-control' id='email' name='email' placeholder='Enter email'>
+                        </div>
+            
+                        <div class='form-group'>
+                            <label for='password'>Password</label>
+                            <input type='password' class='form-control' id='password' name='password' placeholder='Password'>
+                        </div>
+            
+                        <button type='submit' class='btn btn-primary'>Login</button>
+                    </form>
                 </div>
-
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" name="email" id="email" required />
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" name="password" id="password" required />
-                </div>
-
-                <button type='submit' class='btn btn-primary'>Sign Up</button>
             </form>
             `;
 
 
-
-
         clearResponse();
-        $('#products').html(html);
+        $('#home').html(html);
     });
 
     // trigger when registration form is submitted
@@ -68,16 +83,6 @@ $(document).ready(function(){
     });
 
 
-
-
-
-
-/*
-
-    // show login form
-    $(document).on('click', '#login', function(){
-        showLoginPage();
-    });
 
 // trigger when login form is submitted
     $(document).on('submit', '#login_form', function(){
@@ -113,40 +118,12 @@ $(document).ready(function(){
     });
 
 
-*/
     // remove any prompt messages
     function clearResponse(){
         $('#response').html('');
     }
-/*
-// show login page
-    function showLoginPage(){
 
-        // remove jwt
-        setCookie("jwt", "", 1);
 
-        // login page html
-        var html = `
-        <h2>Login</h2>
-        <form id='login_form'>
-            <div class='form-group'>
-                <label for='email'>Email address</label>
-                <input type='email' class='form-control' id='email' name='email' placeholder='Enter email'>
-            </div>
-
-            <div class='form-group'>
-                <label for='password'>Password</label>
-                <input type='password' class='form-control' id='password' name='password' placeholder='Password'>
-            </div>
-
-            <button type='submit' class='btn btn-primary'>Login</button>
-        </form>
-        `;
-
-        $('#content').html(html);
-        clearResponse();
-        showLoggedOutMenu();
-    }
 
 // function to set cookie
     function setCookie(cname, cvalue, exdays) {
@@ -166,11 +143,10 @@ $(document).ready(function(){
 // showHomePage() function will be here
 
 // function to make form values to json format
-    $.fn.serializeObject = function(){
-
+    $.fn.serializeObject = function() {
         var o = {};
         var a = this.serializeArray();
-        $.each(a, function() {
+        $.each(a, function () {
             if (o[this.name] !== undefined) {
                 if (!o[this.name].push) {
                     o[this.name] = [o[this.name]];
@@ -181,8 +157,9 @@ $(document).ready(function(){
             }
         });
         return o;
-    };
+    }
 
-*/
+
+
 });
 
