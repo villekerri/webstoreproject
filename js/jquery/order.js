@@ -2,6 +2,10 @@
 $(document).ready(function(){
     //http://192.168.33.10/api/order/read.php
     $(document).on('click', '#ordersbutton', async function(){
+        console.log("printing user id");
+        var a = await getUserId();
+        console.log(a);
+        console.log("user id printed");
         var orders = await $.getJSON("http://192.168.33.10/api/order/read.php", function(data){
             console.log(data);
         });

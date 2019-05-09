@@ -20,7 +20,6 @@ include_once '../libs/php-jwt/src/BeforeValidException.php';
 include_once '../libs/php-jwt/src/ExpiredException.php';
 include_once '../libs/php-jwt/src/SignatureInvalidException.php';
 include_once '../libs/php-jwt/src/JWT.php';
-
 use \Firebase\JWT\JWT;
 
 if($user_exists && password_verify($data->password, $user->password)){
