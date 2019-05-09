@@ -65,10 +65,15 @@ $(document).ready(function() {
     };
 
 });
-function ordering(id, number) {
-    console.log(id + " "+ number);
-}
 
+async function ordering(proId, number) {
+    var cart;
+    console.log(proId + " "+ number);
+    cart = await $.post('http://192.168.33.10/api/order/read_cart.php',{id: getUserId()}, function(data){});
+    var message = await $.post('http://192.168.33.10/api/order/add.php', { productid: proId , orderquantity: number , orderid: cart}, function(data){});
+    alert(message);
+
+}
 async function removeProduct(id) {
     $.ajax({
         url: 'http://192.168.33.10/api/product/delete.php',
@@ -77,3 +82,4 @@ async function removeProduct(id) {
         datatype: 'json'
     })
 }
+
