@@ -5,7 +5,7 @@ header("Access-Control-Allow-Headers: access");
 header("Access-Control-Allow-Methods: GET");
 header("Access-Control-Allow-Credentials: true");
 header('Content-Type: application/json');
-*/
+
 
 include_once '../config/database.php';
 include_once '../objects/product.php';
@@ -27,7 +27,9 @@ if($product->name!=null){
     http_response_code(200);
     echo json_encode($product_arr);
 } else {
+    */
     http_response_code(404);
     echo json_encode(array("message" => "Product does not exist."));
-}
+
+//}
 ?>

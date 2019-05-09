@@ -11,6 +11,8 @@ $db = $database->getConnection();
 $product = new Product($db);
 $stmt = $product->read();
 $num = $stmt->rowCount();
+
+var_dump($database);
 if($num>0){
 
     $products_arr=array();
@@ -33,6 +35,3 @@ if($num>0){
     echo json_encode(array("message" => "No products found."));
 }
 ?>
-
-<script type="text/javascript">an_obj = "<?php echo $json_data;?>";</script>
-<script type="text/javascript" src="webPages.js"></script>
