@@ -12,7 +12,6 @@ class Database{
 
     public function getConnection(){
         try {
-            echo("asd");
             $conn = new PDO('mysql:host=localhost;dbname=webstore','root','root');
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
