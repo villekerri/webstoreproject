@@ -36,7 +36,7 @@ $(document).ready(function(){
         var orders = await $.ajax({
             url: 'http://192.168.33.10/api/order/read_one.php',
             type: 'POST',
-            data: '{"userid": "101"}', //tähän tarvitaan nykyisen käyttäjän userid
+            data: '{"userid": '+getUserId()+'}', //tähän tarvitaan nykyisen käyttäjän userid
             dataType: 'json',
             success: function(data) {
                 console.log(data);
