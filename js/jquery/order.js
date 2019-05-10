@@ -32,7 +32,7 @@ $(document).ready(function(){
         $('#home').html(html);
         // } else {
         */
-
+        
         var orders = await $.ajax({
             url: 'http://192.168.33.10/api/order/read_one.php',
             type: 'POST',

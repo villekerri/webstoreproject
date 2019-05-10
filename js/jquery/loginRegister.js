@@ -49,7 +49,7 @@ $(document).ready(function(){
         var sign_up_form=$(this);
         var form_data=JSON.stringify(sign_up_form.serializeObject());
         $.ajax({
-            url: "api/user/create_user.php",
+            url: "http://192.168.33.10/api/user/create_user.php",
             type : "POST",
             contentType : 'application/json',
             data : form_data,
