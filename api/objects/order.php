@@ -22,10 +22,7 @@ class Order{
     }
 
     function read_one(){
-        $query = "select orders.orderid, orders.orderstatus, productorders.productorderid, products.productname, 
-                  productorders.orderquantity from orders inner join productorders on 
-                  orders.orderid=productorders.orderid inner join 
-                  products on productorders.productid=products.productid where orders.userid=:userid order by orders.orderid DESC";
+        $query = "select orderid, orderstatus from orders where userid=:userid";
         $stmt = $this->conn->prepare($query);
         $this->userid=htmlspecialchars(strip_tags($this->userid));
         $stmt->bindParam(":userid", $this->userid);

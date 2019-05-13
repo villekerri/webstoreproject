@@ -19,11 +19,14 @@ if($num>0){
         $order_item=array(
             "id" => $orderid,
             "status" => $orderstatus,
+            "productorderid" => $productorderid,
+            "productname" => $productname,
+            "orderquantity" => $orderquantity,
         );
         array_push($orders_arr["orders_list"], $order_item);
     }
     echo json_encode($orders_arr);
 }else{
-    echo json_encode(array("message" => "Shopping cart is empty."));
+    echo json_encode(array("message" => "No shopping cart/shopping cart is empty."));
 }
 ?>
