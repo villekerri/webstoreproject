@@ -2,10 +2,9 @@ $(document).ready(function(){
     $(document).on('click', '#ordersbutton', async function(){
         var userid = await getUserId()
       
-        var orders = await $.getJSON("http://192.168.33.10/api/order/read.php", function(data){});
-        //var asddsa = await $.post("http://192.168.33.10/api/order/create.php", JSON.stringify({userid: userid})).done(function(result) {});
+        //var orders = await $.getJSON("http://192.168.33.10/api/order/read.php", function(data){});
 
-        if (userid === 3) {
+        if (userid == 7) {
             var orders = await $.getJSON("http://192.168.33.10/api/order/read.php", function(data){
                 console.log(data);
             });
@@ -50,10 +49,10 @@ $(document).ready(function(){
                             orderslist += "<tr><td>" + cart.orders_list[i].id +
                                 "</td><td>" + cart.orders_list[i].status +
                                 "</td><td>" + cart.orders_list[i].productorderid +
-                                "</td><td>" + cart.orders_list[i].product +
-                                "</td><td>" + cart.orders_list[i].quantity;
+                                "</td><td>" + cart.orders_list[i].productname +
+                                "</td><td>" + cart.orders_list[i].orderquantity;
                             if (cart.orders_list[i].status == "Shopping cart") {
-                                orderslist += "</td><td><button class='send' onclick='submitOrder(" + cart.orders_list[i].id + ")'>Submit whole cart</button></td>" +
+                                orderslist += "</td><td><button class='send' onclick='submitOrder(" + userid + ")'>Submit whole cart</button></td>" +
                                     "<td><button class='remove_part' onclick='removePart(" + cart.orders_list[i].productorderid + ")'>Remove from cart</button></td></tr>";
                             }
                         }
@@ -101,7 +100,7 @@ async function submitOrder(id){
     $.ajax({
         url: 'http://192.168.33.10/api/order/create.php',
         type: 'POST',
-        data: '{ "userid": "101"}', //data: '{ "orderid": "' + id + '"}', kun löytyy oikee userid
+        data: '{ "userid": "' + id + '"}', //data: '{ "orderid": "' + id + '"}', kun löytyy oikee userid
         datatype: 'json'
     })
 }
