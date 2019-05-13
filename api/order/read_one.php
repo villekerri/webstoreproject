@@ -9,8 +9,8 @@ $data = json_decode(file_get_contents("php://input"));
 $order->userid = $data->userid;
 $stmt = $order->read_one();
 $num = $stmt->rowCount();
-if($num>0){
 
+if($num>0){
     $orders_arr=array();
     $orders_arr["orders_list"]=array();
 
