@@ -4,7 +4,7 @@ $(document).ready(function(){
         var orders = await $.getJSON("http://192.168.33.10/api/order/read.php", function(data){});
 
         // if (admin) {
-        /*
+
         var orders = await $.getJSON("http://192.168.33.10/api/order/read.php", function(data){
             console.log(data);
         });
@@ -31,8 +31,8 @@ $(document).ready(function(){
         clearResponse();
         $('#home').html(html);
         // } else {
-        */
 
+/*
         var orders = await $.ajax({
             url: 'http://192.168.33.10/api/order/read_one.php',
             type: 'POST',
@@ -68,7 +68,7 @@ $(document).ready(function(){
         clearResponse();
         $('#home').html(html);
         // }
-
+*/
     });
 
     function clearResponse(){

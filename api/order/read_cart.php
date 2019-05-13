@@ -18,7 +18,6 @@ if($num>0){
         extract($row);
         $order_item=array(
             "id" => $orderid,
-            "status" => $orderstatus,
         );
         array_push($orders_arr["orders_list"], $order_item);
     }
