@@ -3,7 +3,7 @@ $(document).ready(function(){
       
         var orders = await $.getJSON("http://192.168.33.10/api/order/read.php", function(data){});
 
-        if (getUserId() === 4) {
+        if (getUserId() === 3) {
             var orders = await $.getJSON("http://192.168.33.10/api/order/read.php", function(data){
                 console.log(data);
             });
@@ -31,7 +31,6 @@ $(document).ready(function(){
             $('#home').html(html);
         } else {
             var orders = await $.post("http://192.168.33.10/api/order/read_one.php", JSON.stringify({userid:await getUserId})).done(function(result) {
-                return result.data.id;
             });
             var tassa = function () {
                 var jotain = "<table><tr><th>Order ID</th><th>Status</th><th>Productorder ID</th><th>Product</th><th>Quantity</th><th>Submmit shopping cart</th><th>Remove from the cart</th></tr>";
@@ -64,12 +63,7 @@ $(document).ready(function(){
 });
 
 async function deleteOrder(id){
-    $.ajax({
-        url: 'http://192.168.33.10/api/order/delete.php',
-        type: 'POST',
-        data: '{ "orderid": "' + id + '"}',
-        datatype: 'json'
-    })
+    $.post('http://192.168.33.10/api/order/delete.php',JSON.stringify({orderid:id}));
 }
 
 async function confirmOrder(id){
