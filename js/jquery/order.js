@@ -1,9 +1,11 @@
 $(document).ready(function(){
     $(document).on('click', '#ordersbutton', async function(){
+        var userid = await getUserId()
       
         var orders = await $.getJSON("http://192.168.33.10/api/order/read.php", function(data){});
+        //var asddsa = await $.post("http://192.168.33.10/api/order/create.php", JSON.stringify({userid: userid})).done(function(result) {});
 
-        if (getUserId() === 3) {
+        if (userid === 3) {
             var orders = await $.getJSON("http://192.168.33.10/api/order/read.php", function(data){
                 console.log(data);
             });
@@ -30,45 +32,47 @@ $(document).ready(function(){
             clearResponse();
             $('#home').html(html);
         } else {
-            var orders = await $.post("http://192.168.33.10/api/order/read_one.php", JSON.stringify({userid:await getUserId})).done(function(result) {
+            var userid = await getUserId()
+            var orders = await $.post("http://192.168.33.10/api/order/read_one.php", JSON.stringify({userid: userid})).done(function(result) {
             });
             console.log(orders);
-            var orders = async function () {
-                var orders_list = "<table><tr><th>Order ID</th><th>Order status</th></tr>";
+
+            var cart = await $.post("http://192.168.33.10/api/order/read_cart.php", JSON.stringify({userid: userid})).done(function(result) {
+            });
+            var cartcheck = cart.orders_list[0].id;
+
+            var all_orders = function () {
+                var orderslist = "<table>";
                 for (var i = 0; i < orders.orders_list.length ; i++){
-                    orders_list += "<tr><td>" + orders.orders_list.id +
-                        "</td><td>" + orders.orders_list[i].status + "</td></tr>";
-                    if ( orders.orders_list[i].status == "Shopping cart"){
-                        var cart = await $.post("http://192.168.33.10/api/order/read_cart.php", JSON.stringify({userid:await getUserId})).done(function(result) {
-                            return result.data.id;
-                        });
-                        console.log(cart);
-                        var shopping_cart = function () {
-                            var cart = "<table><tr><th>Order ID</th><th>Status</th><th>Productorder ID</th><th>Product</th><th>Quantity</th><th>Submmit shopping cart</th><th>Remove from the cart</th></tr>";
-                            for (var i = 0; i < orders.orders_list.length ; i++){
-                                cart += "<tr><td>" + orders.orders_list[i].id +
-                                    "</td><td>" + orders.orders_list[i].status +
-                                    "</td><td>" + orders.orders_list[i].productorderid +
-                                    "</td><td>" + orders.orders_list[i].product +
-                                    "</td><td>" + orders.orders_list[i].quantity;
-                                if (orders.orders_list[i].status=="Shopping cart"){
-                                    cart += "</td><td><button class='send' onclick='submitOrder(" + 9999 + ")'>Submit whole cart</button></td>" +
-                                        "<td><button class='remove_part' onclick='removePart(" + orders.orders_list[i].productorderid + ")'>Remove from cart</button></td></tr>"; // userid 9999 tilalle
-                                } else {
-                                    cart += "</td></tr>";
-                                }
+                    if ( orders.orders_list[i].status == "Shopping cart" && cartcheck!=0) {
+                        orderslist += "<tr><th>Order ID</th><th>Status</th><th>Productorder ID</th><th>Product</th><th>Quantity</th><th>Submmit shopping cart</th><th>Remove from the cart</th></tr>";
+                        for (var i = 0; i < cart.orders_list.length; i++) {
+                            orderslist += "<tr><td>" + cart.orders_list[i].id +
+                                "</td><td>" + cart.orders_list[i].status +
+                                "</td><td>" + cart.orders_list[i].productorderid +
+                                "</td><td>" + cart.orders_list[i].product +
+                                "</td><td>" + cart.orders_list[i].quantity;
+                            if (cart.orders_list[i].status == "Shopping cart") {
+                                orderslist += "</td><td><button class='send' onclick='submitOrder(" + cart.orders_list[i].id + ")'>Submit whole cart</button></td>" +
+                                    "<td><button class='remove_part' onclick='removePart(" + cart.orders_list[i].productorderid + ")'>Remove from cart</button></td></tr>";
                             }
-                            cart += "</table>";
-                            return cart;
                         }
+                    } else {
+                        orderslist += "<h5>Your shopping cart is empty.</h5>";
+                        break;
                     }
 
                 }
-                orders_list += "</table>";
-                return orders_list;
+                orderslist += "</table><br><h3>List of orders</h3><table><tr><th>Order ID</th><th>Order status</th></tr>";
+                for (var i = 0; i < orders.orders_list.length ; i++) {
+                    orderslist += "<tr><td>" + orders.orders_list[i].id +
+                        "</td><td>" + orders.orders_list[i].status + "</td></tr>";
+                }
+                orderslist += "</table>";
+                return orderslist;
             }
 
-            var html = `<h2>List of the orders</h2>` + shopping_cart() + orders_list();
+            var html = `<h2>Your shopping cart</h2>` + all_orders();
             clearResponse();
             $('#home').html(html);
         }

@@ -71,9 +71,11 @@ $(document).ready(function(){
             type : "POST",
             contentType : 'application/json',
             data : form_data,
-            success : function(result){
+            success : async function(result){
                 setCookie("jwt", result.jwt, 1);
                 $('#response').html("<div class='alert alert-success'>Successful login.</div>");
+                var userid = await getUserId();
+                var cartcheck = await $.post("http://192.168.33.10/api/order/create_cart.php", JSON.stringify({userid: userid})).done(function(result) {});
             },
             error: function(xhr, resp, text){
                 $('#response').html("<div class='alert alert-danger'>Login failed. Email or password is incorrect.</div>");
