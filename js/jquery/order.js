@@ -33,25 +33,43 @@ $(document).ready(function(){
             var orders = await $.post("http://192.168.33.10/api/order/read_one.php", JSON.stringify({userid:await getUserId})).done(function(result) {
                 return result.data.id;
             });
-            var tassa = function () {
-                var jotain = "<table><tr><th>Order ID</th><th>Status</th><th>Productorder ID</th><th>Product</th><th>Quantity</th><th>Submmit shopping cart</th><th>Remove from the cart</th></tr>";
+            console.log(orders);
+            var orders = async function () {
+                var orders_list = "<table><tr><th>Order ID</th><th>Order status</th></tr>";
                 for (var i = 0; i < orders.orders_list.length ; i++){
-                    jotain += "<tr><td>" + orders.orders_list[i].id +
-                        "</td><td>" + orders.orders_list[i].status +
-                        "</td><td>" + orders.orders_list[i].productorderid +
-                        "</td><td>" + orders.orders_list[i].product +
-                        "</td><td>" + orders.orders_list[i].quantity;
-                        if (orders.orders_list[i].status=="Shopping cart"){
-                            jotain += "</td><td><button class='send' onclick='submitOrder(" + 9999 + ")'>Submit whole cart</button></td>" +
-                                "<td><button class='remove_part' onclick='removePart(" + orders.orders_list[i].productorderid + ")'>Remove from cart</button></td></tr>"; // userid 9999 tilalle
-                        } else {
-                            jotain += "</td></tr>";
+                    orders_list += "<tr><td>" + orders.orders_list.id +
+                        "</td><td>" + orders.orders_list[i].status + "</td></tr>";
+                    if ( orders.orders_list[i].status == "Shopping cart"){
+                        var cart = await $.post("http://192.168.33.10/api/order/read_cart.php", JSON.stringify({userid:await getUserId})).done(function(result) {
+                            return result.data.id;
+                        });
+                        console.log(cart);
+                        var shopping_cart = function () {
+                            var cart = "<table><tr><th>Order ID</th><th>Status</th><th>Productorder ID</th><th>Product</th><th>Quantity</th><th>Submmit shopping cart</th><th>Remove from the cart</th></tr>";
+                            for (var i = 0; i < orders.orders_list.length ; i++){
+                                cart += "<tr><td>" + orders.orders_list[i].id +
+                                    "</td><td>" + orders.orders_list[i].status +
+                                    "</td><td>" + orders.orders_list[i].productorderid +
+                                    "</td><td>" + orders.orders_list[i].product +
+                                    "</td><td>" + orders.orders_list[i].quantity;
+                                if (orders.orders_list[i].status=="Shopping cart"){
+                                    cart += "</td><td><button class='send' onclick='submitOrder(" + 9999 + ")'>Submit whole cart</button></td>" +
+                                        "<td><button class='remove_part' onclick='removePart(" + orders.orders_list[i].productorderid + ")'>Remove from cart</button></td></tr>"; // userid 9999 tilalle
+                                } else {
+                                    cart += "</td></tr>";
+                                }
+                            }
+                            cart += "</table>";
+                            return cart;
                         }
+                    }
+
                 }
-                jotain += "</table>"
-                return jotain
+                orders_list += "</table>";
+                return orders_list;
             }
-            var html = `<h2>List of the orders</h2>` + tassa();
+
+            var html = `<h2>List of the orders</h2>` + shopping_cart() + orders_list();
             clearResponse();
             $('#home').html(html);
         }
