@@ -5,7 +5,6 @@ class Product{
     public $producttype;
     public $productprice;
     public $productquantity;
-
     public $productid;
 
     public function __construct($db){
