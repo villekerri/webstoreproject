@@ -52,17 +52,6 @@ class User{
         }
     }
 
-    function readOne(){
-        $query = "";
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        $this->name = $row['name'];
-        $this->type = $row['type'];
-        $this->price = $row['price'];
-        $this->quantity = $row['quantity'];
-    }
-
     function delete(){
         $query = "DELETE FROM products WHERE id = ?";
         $stmt = $this->conn->prepare($query);
