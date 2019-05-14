@@ -10,7 +10,7 @@ $(document).ready(function(){
             console.log(orders);
 
             var tassa = function () {
-                var table = "<table><tr><th>Order ID</th><th>Status</th><th>Productorder ID</th><th>Product</th><th>Quantity</th><th>User ID</th><th>User address</th></tr>";
+                var table = "<table class='table table-striped'><tr><th>Order ID</th><th>Status</th><th>Productorder ID</th><th>Product</th><th>Quantity</th><th>User ID</th><th>User address</th></tr>";
                 for (var i = 0; i < orders.orders_list.length ; i++){
                     table += "<tr><td>" + orders.orders_list[i].id +
                         "</td><td>" + orders.orders_list[i].status +
@@ -33,7 +33,7 @@ $(document).ready(function(){
             var orders = await $.post("http://192.168.33.10/api/order/read_one.php", JSON.stringify({userid:await getUserId})).done(function(result) {
             });
             var tassa = function () {
-                var jotain = "<table><tr><th>Order ID</th><th>Status</th><th>Productorder ID</th><th>Product</th><th>Quantity</th><th>Submmit shopping cart</th><th>Remove from the cart</th></tr>";
+                var jotain = "<table class='table table-striped'><tr><th>Order ID</th><th>Status</th><th>Productorder ID</th><th>Product</th><th>Quantity</th><th>Submmit shopping cart</th><th>Remove from the cart</th></tr>";
                 for (var i = 0; i < orders.orders_list.length ; i++){
                     jotain += "<tr><td>" + orders.orders_list[i].id +
                         "</td><td>" + orders.orders_list[i].status +

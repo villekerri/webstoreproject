@@ -71,9 +71,9 @@ class Order{
     function addProrder(){
         $query = "insert into productorders set productid=:productid, orderquantity=:orderquantity, orderid=:orderid";
         $stmt = $this->conn->prepare($query);
-        $this->productid=htmlspecialchars(strip_tags($this->productid));
+        $this->productid=$this->productid;
         $this->orderquantity=htmlspecialchars(strip_tags($this->orderquantity));
-        $this->orderid=htmlspecialchars(strip_tags($this->orderid));
+        $this->orderid=$this->orderid;
         $stmt->bindParam(":productid", $this->productid);
         $stmt->bindParam(":orderquantity", $this->orderquantity);
         $stmt->bindParam(":orderid", $this->orderid);

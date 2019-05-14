@@ -46,14 +46,13 @@ $(document).ready(function(){
     $(document).on('submit', '#sign_up_form', function(){
         var sign_up_form=$(this);
         var form_data=JSON.stringify(sign_up_form.serializeObject());
-        console.log(form_data);
         $.ajax({
             url: "api/user/create_user.php",
             type : "POST",
             contentType : 'application/json',
             data : form_data,
             success : function(result) {
-                $('#response').html("<div class='alert alert-success'>Successful sign up. Please login.</div>");
+                $('#response').html("<div class='alert alert-success'>Successful sign up. you are now logged in.</div>");
                 sign_up_form.find('input').val('');
             },
             error: function(xhr, resp, text){
