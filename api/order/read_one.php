@@ -19,9 +19,6 @@ if($num>0){
         $order_item=array(
             "id" => $orderid,
             "status" => $orderstatus,
-            "productorderid" => $productorderid,
-            "product" => $productname,
-            "quantity" => $orderquantity,
         );
         array_push($orders_arr["orders_list"], $order_item);
     }
