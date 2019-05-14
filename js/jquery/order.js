@@ -41,7 +41,7 @@ $(document).ready(function(){
             var cartcheck = cart.orders_list[0].id;
 
             var all_orders = function () {
-                var orderslist = "<table>";
+                var orderslist = "<table class='table table-striped table-hover'>";
                 for (var i = 0; i < orders.orders_list.length ; i++){
                     if ( orders.orders_list[i].status == "Shopping cart" && cartcheck!=0) {
                         orderslist += "<tr><th>Order ID</th><th>Status</th><th>Productorder ID</th><th>Product</th><th>Quantity</th><th>Submmit shopping cart</th><th>Remove from the cart</th></tr>";
@@ -62,7 +62,7 @@ $(document).ready(function(){
                     }
 
                 }
-                orderslist += "</table><br><h3>List of orders</h3><table><tr><th>Order ID</th><th>Order status</th></tr>";
+                orderslist += "</table><br><h3>List of orders</h3><table class='table table-striped table-hover'><tr><th>Order ID</th><th>Order status</th></tr>";
                 for (var i = 0; i < orders.orders_list.length ; i++) {
                     orderslist += "<tr><td>" + orders.orders_list[i].id +
                         "</td><td>" + orders.orders_list[i].status + "</td></tr>";
