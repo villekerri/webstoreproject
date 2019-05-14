@@ -6,10 +6,15 @@ $(document).ready(function() {
             console.log(data);
         });
         var div = document.createElement("div");
-
+        var userid = await getUserId();
         console.log(datajson);
         var productList = function () {
-            var table = "<table class='table table-striped table-hover'><tr><th>Name</th><th>Type</th><th>Price</th><th>Quantity</th><th>Order Product</th></tr>";
+            var table = "<table class='table table-striped table-hover'><tr><th>Name</th><th>Type</th><th>Price</th><th>Quantity</th><th>Order Product</th>";
+            if ( userid == 1){
+                table += "<th>Remove</th></tr>";
+            } else {
+                table+= "</tr>";
+            }
             for (var i = 0; i < datajson.products_list.length; i++) {
                 var options = "";
                 for (var j = 1; j <=datajson.products_list[i].quantity ; j++){
@@ -21,10 +26,11 @@ $(document).ready(function() {
                     "<td>" + datajson.products_list[i].quantity + "</td>" +
                     "<td><select name='score' id=sel"+i+">" + options  + "</select>" +
                     "<button class='button' onclick= ordering(" + datajson.products_list[i].id + ",document.getElementById('sel"+i+"').selectedIndex+1)>Order</button></td>";
-                // if (admin) {
-                table += "<td><button class='button' onclick='removeProduct(" + datajson.products_list[i].id + ")'>Remove</button></td></tr>";
-                // }else{
-                // table += "</tr>";
+                if (userid == 1){
+                    table += "<td><button class='button' onclick='removeProduct(" + datajson.products_list[i].id + ")'>Remove</button></td></tr>";
+                } else {
+                    table += "</tr>";
+                }
             };
             table += "</table>";
             return table;
@@ -39,8 +45,9 @@ $(document).ready(function() {
             '</form><br>'
 
         var html = `<h2>Products</h2>` + productList();
-        //if (admin) {
-        html += createProduct;
+        if ( userid == 1) {
+            html += createProduct;
+        }
 
         $('#home').html(html);
     });
