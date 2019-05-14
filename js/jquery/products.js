@@ -2,14 +2,14 @@
 $(document).ready(function() {
     // show sign up / registration form
     $(document).on('click', '#productsButton', async function () {
-        var datajson = await $.getJSON("http://192.168.33.10/api/product/read.php", function(data){
+        var datajson = await $.getJSON("http://192.168.33.10/api/product/read.php", (data)=>{
             console.log(data);
         });
         var div = document.createElement("div");
 
         console.log(datajson);
         var productList = function () {
-            var table = "<table><tr><th>Name</th><th>Type</th><th>Price</th><th>Quantity</th><th>Order Product</th></tr>";
+            var table = "<table class='table table-striped table-hover'><tr><th>Name</th><th>Type</th><th>Price</th><th>Quantity</th><th>Order Product</th></tr>";
             for (var i = 0; i < datajson.products_list.length; i++) {
                 var options = "";
                 for (var j = 1; j <=datajson.products_list[i].quantity ; j++){
