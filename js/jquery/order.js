@@ -4,7 +4,7 @@ $(document).ready(function(){
       
         //var orders = await $.getJSON("http://192.168.33.10/api/order/read.php", function(data){});
 
-        if (userid == 7) {
+        if (userid == 1) {
             var orders = await $.getJSON("http://192.168.33.10/api/order/read.php", function(data){
                 console.log(data);
             });
