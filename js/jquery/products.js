@@ -3,53 +3,8 @@ $(document).ready(function() {
     // show sign up / registration form
     $(document).on('click', '#productsButton', async function () {
         var datajson = await $.getJSON("http://192.168.33.10/api/product/read.php", (data)=>{
-            console.log(data);
         });
-        var div = document.createElement("div");
-        var userid = await getUserId();
-        console.log(datajson);
-        var productList = function () {
-            var table = "<table class='table table-striped table-hover'><tr><th>Name</th><th>Type</th><th>Price</th><th>Quantity</th><th>Order Product</th>";
-            if ( userid == 1){
-                table += "<th>Remove</th></tr>";
-            } else {
-                table+= "</tr>";
-            }
-            for (var i = 0; i < datajson.products_list.length; i++) {
-                var options = "";
-                for (var j = 1; j <=datajson.products_list[i].quantity ; j++){
-                    options = options + "<option value= "+ j +">"+ j +"</option>";
-                }
-                table += "<tr><td>" + datajson.products_list[i].name + "</td>" +
-                    "<td>" + datajson.products_list[i].type + "</td>" +
-                    "<td>" + datajson.products_list[i].price + "</td>" +
-                    "<td>" + datajson.products_list[i].quantity + "</td>" +
-                    "<td><select name='score' id=sel"+i+">" + options  + "</select>" +
-                    "<button class='button' onclick= ordering(" + datajson.products_list[i].id + ",document.getElementById('sel"+i+"').selectedIndex+1)>Order</button></td>";
-                if (userid == 1){
-                    table += "<td><button class='button' onclick='removeProduct(" + datajson.products_list[i].id + ")'>Remove</button></td></tr>";
-                } else {
-                    table += "</tr>";
-                }
-            };
-            table += "</table>";
-            return table;
-        };
-
-        var createProduct = '<h4>Add a new product:</h4><br><form id="product_form" method="post">' +
-            '  Product name: <br><input type="text" name="productname" id="createproductname"/><br>' +
-            '  Product type: <br><input type="text" name="producttype" id="createproducttype"/><br>' +
-            '  Product price: <br><input type="number" step="0.01" name="productprice" id="createproductprice" /><br>' +
-            '  Product quantity: <br><input type="number" name="productquantity" id="createproductquantity"/>' +
-            '  <br><input type="button" id="submitproduct" value="Add product"/>' +
-            '</form><br>'
-
-        var html = `<h2>Products</h2>` + productList();
-        if ( userid == 1) {
-            html += createProduct;
-        }
-
-        $('#home').html(html);
+        refreshList();
     });
 
     $(document).on('click', '#submitproduct', function () {
@@ -63,23 +18,35 @@ $(document).ready(function() {
             data: '{ "productname": "' + productname + '", "producttype": "' + producttype + '", "productprice": "' + productprice + '", "productquantity": "' + productquantity + '"}',
             datatype: 'json'
         });
+        refreshList();
     });
 
-    // remove any prompt messages
     function clearResponse(){
         $('#response').html('');
-
     };
 
 });
 
 async function ordering(proId, number) {
     var cart;
-    var userId = await getUserId();
-    console.log(userId);
-    cart = await $.post('http://192.168.33.10/api/order/read_cart.php',JSON.stringify({userid: userId}), function(data){});
+    var userId = await getUserId();    
+    cart = await $.post(
+        'http://192.168.33.10/api/order/read_cart.php',
+        JSON.stringify({userid: userId}),
+        function(data){}
+    );
+    
     console.log(cart);
-    var message = await $.post('http://192.168.33.10/api/order/add.php', JSON.stringify({ productid: proId , orderquantity: number , orderid: cart}), function(data){});
+    
+    var message = await $.post(
+        'http://192.168.33.10/api/order/add.php', 
+        JSON.stringify({ 
+            productid: proId,
+            orderquantity: number,
+            orderid: cart.orders_list[0].orderid
+        }),
+        function(data){}
+    );
     alert(message);
 }
 
@@ -91,4 +58,54 @@ async function removeProduct(id) {
         datatype: 'json'
     })
 }
+
+async function refreshList() {
+    var datajson = await $.getJSON("http://192.168.33.10/api/product/read.php", (data)=>{
+        console.log(data);
+    });
+    var div = document.createElement("div");
+    var userid = await getUserId();
+    console.log(datajson);
+    var productList = function () {
+        var table = "<table class='table table-striped table-hover'><tr><th>Name</th><th>Type</th><th>Price</th><th>Quantity</th><th>Order Product</th>";
+        if ( userid == 1){
+            table += "<th>Remove</th></tr>";
+        } else {
+            table+= "</tr>";
+        }
+        for (var i = 0; i < datajson.products_list.length; i++) {
+            var options = "";
+            for (var j = 1; j <=datajson.products_list[i].quantity ; j++){
+                options = options + "<option value= "+ j +">"+ j +"</option>";
+            }
+            table += "<tr><td>" + datajson.products_list[i].name + "</td>" +
+                "<td>" + datajson.products_list[i].type + "</td>" +
+                "<td>" + datajson.products_list[i].price + "</td>" +
+                "<td>" + datajson.products_list[i].quantity + "</td>" +
+                "<td><select name='score' id=sel"+i+">" + options  + "</select>" +
+                "<button class='button' onclick= ordering(" + datajson.products_list[i].id + ",document.getElementById('sel"+i+"').selectedIndex+1)>Order</button></td>";
+            if (userid == 1){
+                table += "<td><button class='button' onclick='removeProduct(" + datajson.products_list[i].id + ")'>Remove</button></td></tr>";
+            } else {
+                table += "</tr>";
+            }
+        };
+        table += "</table>";
+        return table;
+    };
+
+    var createProduct = '<h4>Add a new product:</h4><br><form id="product_form" method="post">' +
+        '  Product name: <br><input type="text" name="productname" id="createproductname"/><br>' +
+        '  Product type: <br><input type="text" name="producttype" id="createproducttype"/><br>' +
+        '  Product price: <br><input type="number" step="0.01" name="productprice" id="createproductprice" /><br>' +
+        '  Product quantity: <br><input type="number" name="productquantity" id="createproductquantity"/>' +
+        '  <br><input type="button" id="submitproduct" value="Add product"/>' +
+        '</form><br>'
+
+    var html = `<h2>Products</h2>` + productList();
+    if ( userid == 1) {
+        html += createProduct;
+    }
+    $('#home').html(html);
+};
 
