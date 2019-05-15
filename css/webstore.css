@@ -1,6 +1,6 @@
-/*
+
 body {
-    background-image: url("https://upload.wikimedia.org/wikipedia/commons/d/de/FraiseFruitPhoto.jpg");
+    background-image: url("/background.jpg");
     background-position: left top;
     background-attachment: fixed;
 }
@@ -12,16 +12,17 @@ div.container {
 div.float-left {
     background-color: white;
     padding: 10px;
+    box-shadow: 5px 10px #888888;
 }
 div.float-right {
     background-color: white;
     padding: 10px;
+    box-shadow: 5px 10px #888888;
 }
 div#home {
-    padding-top: 30px;
+    height: 100%;
     padding-right: 20px;
     padding-left: 20px;
-    padding-bottom: 50%;
     background-color: white;
+    box-shadow: 5px 10px #888888;
 }
-*/
