@@ -29,25 +29,21 @@ $(document).ready(function() {
 
 async function ordering(proId, number) {
     var cart;
-    var userId = await getUserId();    
+    var userId = await getUserId();
     cart = await $.post(
-        'http://192.168.33.10/api/order/read_cart.php',
-        JSON.stringify({userid: userId}),
+        'http://192.168.33.10/api/order/check_cart.php',
+        JSON.stringify({userid: userId}), 
         function(data){}
     );
-    
-    console.log(cart);
-    
     var message = await $.post(
-        'http://192.168.33.10/api/order/add.php', 
-        JSON.stringify({ 
+        'http://192.168.33.10/api/order/add.php',
+        JSON.stringify({
             productid: proId,
             orderquantity: number,
-            orderid: cart.orders_list[0].orderid
+            orderid: cart.orders_list[0].id
         }),
         function(data){}
     );
-    alert(message);
 }
 
 async function removeProduct(id) {
