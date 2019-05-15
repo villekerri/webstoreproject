@@ -113,7 +113,6 @@ $(document).ready(function(){
                 o[this.name] = this.value || '';
             }
         });
-        console.log(o);
         return o;
     }
 });
