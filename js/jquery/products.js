@@ -2,8 +2,6 @@
 $(document).ready(function() {
     // show sign up / registration form
     $(document).on('click', '#productsButton', async function () {
-        var datajson = await $.getJSON("http://192.168.33.10/api/product/read.php", (data)=>{
-        });
         refreshList();
     });
 
@@ -12,12 +10,10 @@ $(document).ready(function() {
         var producttype = $('#createproducttype').val();
         var productprice = $('#createproductprice').val();
         var productquantity = $('#createproductquantity').val();
-        $.ajax({
-            url: 'http://192.168.33.10/api/product/create.php',
-            type: 'POST',
-            data: '{ "productname": "' + productname + '", "producttype": "' + producttype + '", "productprice": "' + productprice + '", "productquantity": "' + productquantity + '"}',
-            datatype: 'json'
-        });
+        $.post(
+            '/api/product/create.php',
+            JSON.stringify({ productname: productname , producttype: producttype, productprice: productprice , productquantity:productquantity})
+        );
         refreshList();
     });
 
@@ -28,37 +24,17 @@ $(document).ready(function() {
 });
 
 async function ordering(proId, number) {
-    var cart;
     var userId = await getUserId();
-    cart = await $.post(
-        'http://192.168.33.10/api/order/check_cart.php',
-        JSON.stringify({userid: userId}), 
-        function(data){}
-    );
-    var message = await $.post(
-        'http://192.168.33.10/api/order/add.php',
-        JSON.stringify({
-            productid: proId,
-            orderquantity: number,
-            orderid: cart.orders_list[0].id
-        }),
-        function(data){}
-    );
+    $.post('/api/order/check_cart.php', JSON.stringify({userid: userId}));
 }
 
 async function removeProduct(id) {
-    $.ajax({
-        url: 'http://192.168.33.10/api/product/delete.php',
-        type: 'POST',
-        data: '{ "productid": "' + id + '"}',
-        datatype: 'json'
-    })
+    $.post('/api/product/delete.php',JSON.stringify({ productid: id}));
+    refreshList();
 }
 
 async function refreshList() {
-    var datajson = await $.getJSON("http://192.168.33.10/api/product/read.php", (data)=>{
-        console.log(data);
-    });
+    var datajson = await $.getJSON("/api/product/read.php");
     var div = document.createElement("div");
     var userid = await getUserId();
     console.log(datajson);
