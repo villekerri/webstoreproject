@@ -25,7 +25,15 @@ $(document).ready(function() {
 
 async function ordering(proId, number) {
     var userId = await getUserId();
-    $.post('/api/order/check_cart.php', JSON.stringify({userid: userId}));
+    var cart = await $.post('/api/order/check_cart.php', JSON.stringify({userid: userId}));
+    $.post(
+        'http://192.168.33.10/api/order/add.php',
+        JSON.stringify({
+            productid: proId,
+            orderquantity: number,
+            orderid: cart.orders_list[0].id
+        })
+    );
 }
 
 async function removeProduct(id) {

@@ -10,7 +10,6 @@ $order->userid = $data->userid;
 
 if($order->read_cart()){
     if($order->submitOrder()){
-        echo json_encode(array("message" => "Shopping cart submitted."));
         if($order->createShoppingCart()){
             echo json_encode(array("message" => "Shopping cart was created."));
         }else{
